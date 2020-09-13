@@ -1,0 +1,33 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+
+---
+spring:
+  profiles: dev
+#  datasource:
+#    url: jdbc:mysql://127.0.0.1:3306/test?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useSSL=false
+#    #url: jdbc:mysql://127.0.0.1:3306/test?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+#
+#    username: root
+#    password: root
+#    filters: log4j,wall,mergeStat
+#    sql-script-encoding: UTF-8
+#    schema: classpath*:sql/*-schema.sql
+#    data: classpath*:sql/*-data.sql
+#    initialize: false
+
+io:
+  fileUploadPath: ""
+  fileHost: ""
+  sso:
+    endpoint: "http://oss-cn-shenzhen.aliyuncs.com"
+    accessKeyId: ""
+    accessKeySecret: ""
+    bucketName: ""
+    username: ""
+    thumbParam: "x-oss-process=image/resize,m_fill,h_750,w_750"
+    accessUrl: "http://muaskin.oss-cn-shenzhen.aliyuncs.com/"
