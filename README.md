@@ -2,10 +2,12 @@
 
 #### application.yml 配置文件
 ```yaml
-am:  ## 基于spring boot本地文件上传配置
-  fileUploadPath: "/images"
-  fileHost: "http://localhost:8080"
-  
+## 基于springboot本地文件上传配置
+am:
+   fileUploadPath: /images
+   fileHost: http://localhost:8080/images
+   
+## 基于aliyun服务配置
 aliyun:
   sso:
     endpoint: "http://oss-cn-shenzhen.aliyuncs.com"
