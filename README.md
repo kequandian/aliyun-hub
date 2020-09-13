@@ -53,5 +53,6 @@ server{
 
     location /images {
         root /usr/share/nginx/html;
-    }    
+    } 
+}
 ```
