@@ -58,7 +58,20 @@ aliyun:
 
 ```
 ​```
-location /api/fs {
+		location /api/fs {
+        proxy_pass http://aliyun-hub:8080;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto  $scheme;
+        proxy_buffering off;
+        proxy_max_temp_file_size 0;
+        proxy_connect_timeout 30;
+        proxy_cache_valid 200 302 10m;
+        proxy_cache_valid 301 1h;
+        proxy_cache_valid any 1m;
+    }
+    location /api/cms {
         proxy_pass http://aliyun-hub:8080;
         proxy_set_header Host $http_host;
         proxy_set_header X-Real-IP $remote_addr;
