@@ -8,3 +8,7 @@ services:
       - ./upload-files:/upload-files
     ports:
       - '8080:8080'
+networks:
+  default:
+    external:
+      name: ${network}
