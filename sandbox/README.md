@@ -52,12 +52,11 @@ aliyun:
 
 ##### Nginx 配置文件
 
-> 为了能在连接的网络中调用Aliyun-hub的上传API，需要在连接的网络中的nginx容器中配置路由规则。
+> 将`aliyun-hub.conf`配置文件拷贝到连接的网络的nginx容器的`conf/sandbox`目录下。
 
-配置如下：
+nginx的配置文件：
 
 ```
-​```
 		location /api/fs {
         proxy_pass http://aliyun-hub:8080;
         proxy_set_header Host $http_host;
@@ -84,7 +83,6 @@ aliyun:
         proxy_cache_valid 301 1h;
         proxy_cache_valid any 1m;
     }
-​```
 ```
 
 
