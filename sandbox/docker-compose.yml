@@ -1,11 +1,11 @@
 version: '3'
 services:
-  zero-upload:
+  aliyun-hub:
     image: zelejs/app-openjre11
-    container_name: zero-upload
+    container_name: aliyun-hub
     volumes:
-      - ./zero-upload:/webapps
-      - ./upload-files:/upload-files
+      - ./api:/webapps
+      - ./attachments:/attachments
     ports:
       - '8080:8080'
 networks:

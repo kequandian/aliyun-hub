@@ -31,7 +31,7 @@ $ mvn package
 ```yml
 ## 本地文件上传配置
 am:
-   fileUploadPath: /images
+   fileUploadPath: /attachments
    fileHost: http://localhost:8080/images
    
 ## aliyun服务配置
@@ -48,6 +48,34 @@ aliyun:
     accessKeyId: ""
     accessKeySecret: ""
 ```
+
+
+##### Nginx 配置文件
+
+> 为了能在连接的网络中调用Aliyun-hub的上传API，需要在连接的网络中的nginx容器中配置路由规则。
+
+配置如下：
+
+```
+​```
+location /api/fs {
+        proxy_pass http://aliyun-hub:8080;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto  $scheme;
+        proxy_buffering off;
+        proxy_max_temp_file_size 0;
+        proxy_connect_timeout 30;
+        proxy_cache_valid 200 302 10m;
+        proxy_cache_valid 301 1h;
+        proxy_cache_valid any 1m;
+    }
+​```
+```
+
+
+
 
 
 #### 执行配置脚本文件
