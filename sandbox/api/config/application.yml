@@ -1,5 +1,5 @@
 ## 基于springboot本地文件上传配置
-am:
+io:
    fileUploadPath: /attachments
    fileHost: http://localhost:8080/attachments
    
