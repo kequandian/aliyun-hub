@@ -1,7 +1,7 @@
 ## 基于springboot本地文件上传配置
 am:
-   fileUploadPath: /images
-   fileHost: http://localhost:8080/images
+   fileUploadPath: /attachments
+   fileHost: http://localhost:8080/attachments
    
 ## 基于aliyun服务配置
 aliyun:
