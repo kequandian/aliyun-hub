@@ -21,8 +21,8 @@ spring:
 #    initialize: false
 
 io:
-  fileUploadPath: ""
-  fileHost: ""
+  fileUploadPath: "attachments"
+  fileHost: "http://localhost:8080/"
   sso:
     endpoint: "http://oss-cn-shenzhen.aliyuncs.com"
     accessKeyId: ""

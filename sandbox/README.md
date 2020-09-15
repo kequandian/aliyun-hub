@@ -32,7 +32,7 @@ $ mvn package
 ## 本地文件上传配置
 am:
    fileUploadPath: /attachments
-   fileHost: http://localhost:8080/images
+   fileHost: http://localhost:8080/attachments   
    
 ## aliyun服务配置
 aliyun:
@@ -52,39 +52,7 @@ aliyun:
 
 ##### Nginx 配置文件
 
-> 将`aliyun-hub.conf`配置文件拷贝到连接的网络的nginx容器的`conf/sandbox`目录下。
-
-nginx的配置文件：
-
-```
-		location /api/fs {
-        proxy_pass http://aliyun-hub:8080;
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto  $scheme;
-        proxy_buffering off;
-        proxy_max_temp_file_size 0;
-        proxy_connect_timeout 30;
-        proxy_cache_valid 200 302 10m;
-        proxy_cache_valid 301 1h;
-        proxy_cache_valid any 1m;
-    }
-    location /api/cms {
-        proxy_pass http://aliyun-hub:8080;
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto  $scheme;
-        proxy_buffering off;
-        proxy_max_temp_file_size 0;
-        proxy_connect_timeout 30;
-        proxy_cache_valid 200 302 10m;
-        proxy_cache_valid 301 1h;
-        proxy_cache_valid any 1m;
-    }
-```
-
+> 将`aliyun-hub.conf`配置文件拷贝到连接的网络的nginx容器的`conf/sandbox.d`目录下。
 
 
 
