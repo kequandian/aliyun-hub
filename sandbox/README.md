@@ -52,7 +52,7 @@ aliyun:
 
 ##### Nginx 配置文件
 
-> 将`aliyun-hub.conf`配置文件拷贝到连接的网络的nginx容器的`conf/sandbox.d`目录下。
+将`aliyun-hub.conf`配置文件拷贝到**连接的网络的nginx容器**的`conf/sandbox.d`目录下。
 
 
 
