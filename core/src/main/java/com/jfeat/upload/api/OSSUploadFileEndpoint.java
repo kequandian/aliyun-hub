@@ -22,7 +22,7 @@ import java.util.UUID;
 
 @Api(value = "Service")
 @RestController
-@RequestMapping("/api/cms/oss/upload")
+@RequestMapping("/api/cloud/aliyun")
 public class OSSUploadFileEndpoint {
 
     /**
@@ -46,7 +46,7 @@ public class OSSUploadFileEndpoint {
     public static final String accessUrl = "http://muaskin.oss-cn-shenzhen.aliyuncs.com/";
 
     @ApiOperation(value = "上传文件",response = FileInfo.class)
-    @PostMapping("/files")
+    @PostMapping("/oss/upload")
     @ResponseBody
     public Tip FileUpload(@RequestHeader("authorization") String token,
                           @RequestPart("file") MultipartFile file) throws IOException {

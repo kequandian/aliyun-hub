@@ -196,7 +196,7 @@ public class FileServiceEndpoint {
         return SuccessTip.create(FileInfo.create(getFileHost(), fileName, extensionName, originalFileName, fileSize, path));
     }
 
-    @ApiOperation(value = "下载文件")
+    // @ApiOperation(value = "下载文件")
     @GetMapping("/api/pub/fs/loadfile")
     @ResponseBody
     public void loadFile(@RequestParam(required = true) String name,
