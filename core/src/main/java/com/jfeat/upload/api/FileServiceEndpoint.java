@@ -246,12 +246,12 @@ public class FileServiceEndpoint {
         String host = fileHost;
 //        String tenant = JWTKit.getTenantId(getHttpServletRequest()) + "";
         // TODO 租户
-        String tenant = "TODO";
+        /*String tenant = "TODO";
         if (!fileHost.endsWith("/")) {
             host = host + "/" + tenant;
         } else {
             host = host + tenant;
-        }
+        }*/
         return host;
     }
 
@@ -260,11 +260,15 @@ public class FileServiceEndpoint {
         String uploadPath = fileSavePath;
 //        String tenant = JWTKit.getTenantId(getHttpServletRequest()) + "";
         // TODO 租户
-        String tenant = "TODO";
+        /*String tenant = "TODO";
         if (!fileSavePath.endsWith(File.separator)) {
             uploadPath = uploadPath + File.separator + tenant + File.separator;
         } else {
             uploadPath = uploadPath + tenant + File.separator;
+        }*/
+
+        if (!fileSavePath.endsWith((File.separator))) {
+            uploadPath = uploadPath + File.separator;
         }
 
         File file = new File(uploadPath);
