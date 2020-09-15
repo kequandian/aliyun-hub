@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.jfeat</groupId>
-    <artifactId>file-upload</artifactId>
+    <artifactId>aliyun-hub</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
