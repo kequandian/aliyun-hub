@@ -1,13 +1,16 @@
 version: '3'
 services:
   aliyun-hub:
-    image: zelejs/app-openjre11
+    image: zelejs/allin-web:jdk11
+    privileged: true
     container_name: aliyun-hub
     volumes:
       - ./api:/webapps
       - ./attachments:/attachments
     ports:
       - '8080:8080'
+    environment:
+      DL_STANDALONE: "aliyun-hub-1.0.0-standalone.jar"
 networks:
   default:
     external:
