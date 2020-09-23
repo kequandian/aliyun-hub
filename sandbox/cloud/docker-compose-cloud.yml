@@ -1,0 +1,23 @@
+version: '3'
+services:
+  aliyun-hub:
+    image: zelejs/allin-web:jdk11
+    privileged: true
+    container_name: aliyun-hub-api
+    volumes:
+      - ./api:/webapps
+      - ./nginx/attachments:/attachments
+  nginx:
+    container_name: aliyun-hub-nginx
+    privileged: true
+    image: 'daocloud.io/library/nginx:latest'
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/images:/usr/share/nginx/html/images
+      - ./nginx/attachments:/usr/share/nginx/html/attachments
+    environment:
+      TZ: "Asia/Shanghai"
+    depends_on:
+      - "api"
+    ports:
+      - 8000:80   ## 8000 for gateway router
