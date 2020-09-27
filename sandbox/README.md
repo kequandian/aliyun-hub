@@ -71,3 +71,9 @@ c32dac1f4b2b        network_you_connect     bridge              local
 ```
 $ docker-compose up -d
 ```
+
+#### 访问 swagger-ui.html 查看 api文档
+> http://<sandbox-endpoint>/aliyun-hub/swagger-ui.html
+> e.g.  http://192.168.3.100:8080/aliyun-hub/swagger-ui.html
+
+
