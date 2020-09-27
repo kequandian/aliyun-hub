@@ -6,7 +6,17 @@ services:
     container_name: aliyun-hub
     volumes:
       - ./api:/webapps
-      - /host/sandbox/nginx/attachments:/attachments  ## set host /host/sandbox/nginx/attachments
+      - ./attachments:/attachments  ## set host /host/sandbox/nginx/attachments
+    #environment:
+    #    DL_STANDALONE: "aliyun-hub-1.0.0-standalone.jar"
+  aliyun-hub-dl:
+    container_name: aliyun-hub-dl
+    privileged: true
+    image: 'daocloud.io/library/nginx:latest'
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./images:/usr/share/nginx/html/images
+      - ./attachments:/usr/share/nginx/html/attachments
 networks:
   default:
     external:

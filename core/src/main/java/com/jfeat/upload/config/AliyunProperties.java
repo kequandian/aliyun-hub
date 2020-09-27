@@ -12,12 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Data
 @Component
-@ConfigurationProperties(prefix = "io")
-public class IOProperties {
-
-    private String fileUploadPath;
-
-    private String fileHost;
+@ConfigurationProperties(prefix = "aliyun")
+public class AliyunProperties {
 
     private SSOProperties sso = new SSOProperties();
 
@@ -35,7 +31,7 @@ public class IOProperties {
         /**
          * 访问域名
          **/
-        private String accessUrl = "";
+        private String accessUrl = "http://xxxxxx.oss-cn-shenzhen.aliyuncs.com";
     }
 
 }
