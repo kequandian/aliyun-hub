@@ -17,6 +17,8 @@ public class AliyunProperties {
 
     private SSOProperties sso = new SSOProperties();
 
+    private SmsProperties sms = new SmsProperties();
+
     @Data
     public class SSOProperties {
         private String endpoint = "";
@@ -32,6 +34,13 @@ public class AliyunProperties {
          * 访问域名
          **/
         private String accessUrl = "http://xxxxxx.oss-cn-shenzhen.aliyuncs.com";
+    }
+
+
+    @Data
+    public class SmsProperties {
+        private String accessKeyId;
+        private String accessSecret;
     }
 
 }

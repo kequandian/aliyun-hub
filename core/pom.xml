@@ -19,6 +19,7 @@
         <crud-dev.version>0.0.1</crud-dev.version>
         <crud-base.version>0.0.2</crud-base.version>
         <aliyun-sdk-oss.version>3.4.0</aliyun-sdk-oss.version>
+        <aliyun-java-sdk-core.version>4.5.3</aliyun-java-sdk-core.version>
     </properties>
 
     <dependencies>
@@ -56,6 +57,13 @@
             <groupId>com.aliyun.oss</groupId>
             <artifactId>aliyun-sdk-oss</artifactId>
             <version>${aliyun-sdk-oss.version}</version>
+        </dependency>
+
+        <!-- 阿里云短信SDK -->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>${aliyun-java-sdk-core.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.jhlabs/filters -->

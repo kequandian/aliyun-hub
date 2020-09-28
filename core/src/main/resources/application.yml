@@ -20,9 +20,10 @@ spring:
 #    data: classpath*:sql/*-data.sql
 #    initialize: false
 
-io:
+fs:
   fileUploadPath: "attachments"
   fileHost: "http://localhost:8080/"
+aliyun:
   sso:
     endpoint: "http://oss-cn-shenzhen.aliyuncs.com"
     accessKeyId: ""
@@ -31,3 +32,7 @@ io:
     username: ""
     thumbParam: "x-oss-process=image/resize,m_fill,h_750,w_750"
     accessUrl: "http://muaskin.oss-cn-shenzhen.aliyuncs.com/"
+
+  sms:
+    accessKeyId: ""
+    accessSecret: ""
