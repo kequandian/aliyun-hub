@@ -1,4 +1,4 @@
-package com.jfeat.oss.aliababa;
+package com.jfeat.oss;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;

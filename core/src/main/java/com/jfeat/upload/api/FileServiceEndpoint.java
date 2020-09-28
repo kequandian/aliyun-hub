@@ -7,7 +7,7 @@ import com.jfeat.crud.base.exception.BusinessException;
 import com.jfeat.crud.base.tips.SuccessTip;
 import com.jfeat.crud.base.tips.Tip;
 import com.jfeat.crud.base.util.StrKit;
-import com.jfeat.upload.config.FSProperties;
+import com.jfeat.properties.FSProperties;
 import com.jfeat.upload.services.LoadFileCodeService;
 import com.jfeat.upload.util.FileInfo;
 import com.jfeat.upload.util.ImageUtil;
