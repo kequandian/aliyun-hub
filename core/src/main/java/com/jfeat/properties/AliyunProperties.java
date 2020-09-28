@@ -39,6 +39,8 @@ public class AliyunProperties {
 
     @Data
     public class SmsProperties {
+
+        private String signName;
         private String accessKeyId;
         private String accessSecret;
     }

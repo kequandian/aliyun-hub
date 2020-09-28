@@ -34,6 +34,12 @@ public class SmsUtil {
     private String accessSecret = Optional.ofNullable(aliyunProperties.getSms())
             .map(AliyunProperties.SmsProperties::getAccessSecret).orElse(null);
 
+    /**
+     * 短信签名
+     */
+    private String signName = Optional.ofNullable(aliyunProperties.getSms())
+            .map(AliyunProperties.SmsProperties::getSignName).orElse(null);
+
     private IAcsClient client = null;
 
     static {
@@ -41,7 +47,7 @@ public class SmsUtil {
         client = new DefaultAcsClient(profile);
     }
 
-    public void sendSms(String phoneNumbers, String signName, String templateCode, String templateParam) {
+    public void sendSms(String phoneNumbers, String templateCode, String templateParam) {
         CommonRequest request = new CommonRequest();
         request.setSysMethod(MethodType.POST);
         request.setSysDomain("dysmsapi.aliyuncs.com");
@@ -64,12 +70,11 @@ public class SmsUtil {
     @SneakyThrows
     public void main(String[] args) {
         String phone = "";
-        String signName = "";
         String templateCode = "";
         JSONObject jsonParam = new JSONObject();
         jsonParam.put("code", "123");
         String templateParam = jsonParam.toString();
         log.info("templateParam : {}", templateCode);
-        sendSms(phone,signName, templateCode, templateParam);
+        sendSms(phone,templateCode, templateParam);
     }
 }

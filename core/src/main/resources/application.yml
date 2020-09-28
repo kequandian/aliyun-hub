@@ -34,5 +34,6 @@ aliyun:
     accessUrl: "http://muaskin.oss-cn-shenzhen.aliyuncs.com/"
 
   sms:
+    signName: ""
     accessKeyId: ""
     accessSecret: ""
