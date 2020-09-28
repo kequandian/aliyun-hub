@@ -3,7 +3,7 @@
 
 #### 准备 API jar包 
 
-在[core](./core)项目目录执行`mvn package`将aliyun-hub上传模块打包，之后将生成的`file-upload-1.0.0-standalone.jar`包放入`api`目录。
+在[core](./core)项目目录执行`mvn package`将aliyun-hub上传模块打包，之后将生成的`aliyun-hub-1.0.0-standalone.jar`包放入`api`目录。
 
 ```
 $ mvn package
