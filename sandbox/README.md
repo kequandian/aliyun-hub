@@ -40,14 +40,6 @@ aliyun:
     accessKeySecret: ""
 ```
 
-##### Nginx 配置文件
-> TODO: 通过工具可省略这一步
-```
-docker inspect cinema-nginx --format '{{$ports := index .NetworkSettings.Ports "80/tcp"}}{{(index $ports 0).HostPort}}'
-```
-
-将 sandbox.d/*.conf 配置文件拷贝到 **连接的网络的nginx容器** 的 `conf.d/sandbox.d`目录下。
-
 
 #### 执行配置脚本文件
 
