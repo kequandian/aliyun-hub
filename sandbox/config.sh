@@ -11,6 +11,26 @@ if [ ! $network ];then
     exit
 fi
 
+
+get_nginx_container() {
+   docker network inspect $network  --format '{{range .Containers}}{{$name := .Name}}{{println $name}}{{end}}' | grep nginx
+}
+
+get_nginx_confd_path() {
+   docker inspect cinema-nginx --format '{{range .Mounts}}{{$path := .Source}}{{println $path}}{{end}}' | grep conf.d
+}
+
+gateway_container=$(get_nginx_container)
+gateway_confd=$(get_nginx_confd_path)
+
+## copy sandbox.d/*.conf to $gateway_confd/sandbox.d
+if [ -d sandbox.d ];then
+  echo "cp sandbox.d/*.conf $gateway_confd/sandbox.d"
+  if [ ! -d  $gateway_confd/sandbox.d ];then mkdir $gateway_confd/sandbox.d fi
+  cp sandbox.d/*.conf $gateway_confd/sandbox.d
+fi
+
+
 #cat $webapps/api/config/application.yml
 
 # config docker network
@@ -24,3 +44,4 @@ fi
 ## start docker
 #echo 'docker-compose up ...'
 #docker-compose -f docker-compose.yml up
+
