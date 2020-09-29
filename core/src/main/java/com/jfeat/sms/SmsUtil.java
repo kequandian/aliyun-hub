@@ -26,23 +26,21 @@ public class SmsUtil {
 
     private final String domain = "dysmsapi.aliyuncs.com";
 
-    private AliyunProperties aliyunProperties = SpringContextUtil.getBean(AliyunProperties.class);
+    private String accessKeyId;
 
-    private String accessKeyId = Optional.ofNullable(aliyunProperties.getSms())
-            .map(AliyunProperties.SmsProperties::getAccessKeyId).orElse(null);
-
-    private String accessSecret = Optional.ofNullable(aliyunProperties.getSms())
-            .map(AliyunProperties.SmsProperties::getAccessSecret).orElse(null);
+    private String accessSecret;
 
     /**
      * 短信签名
      */
-    private String signName = Optional.ofNullable(aliyunProperties.getSms())
-            .map(AliyunProperties.SmsProperties::getSignName).orElse(null);
+    private String signName;
 
     private IAcsClient client = null;
 
-    static {
+    public void init(String accessKeyId, String accessSecret, String signName) {
+        SmsUtil.accessKeyId = accessKeyId;
+        SmsUtil.accessSecret = accessSecret;
+        SmsUtil.signName = signName;
         DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessSecret);
         client = new DefaultAcsClient(profile);
     }
@@ -50,7 +48,7 @@ public class SmsUtil {
     public void sendSms(String phoneNumbers, String templateCode, String templateParam) {
         CommonRequest request = new CommonRequest();
         request.setSysMethod(MethodType.POST);
-        request.setSysDomain("dysmsapi.aliyuncs.com");
+        request.setSysDomain(domain);
         request.setSysVersion("2017-05-25");
         request.setSysAction("SendSms");
         request.putQueryParameter("RegionId", "cn-hangzhou");
@@ -60,7 +58,7 @@ public class SmsUtil {
         request.putQueryParameter("TemplateParam", templateParam);
         try {
             CommonResponse response = client.getCommonResponse(request);
-            System.out.println(response.getData());
+            log.info(response.getData());
         } catch (ClientException e) {
             e.printStackTrace();
         }
