@@ -43,6 +43,7 @@ public class AliyunProperties {
         private String signName;
         private String accessKeyId;
         private String accessSecret;
+        private Boolean enable;
     }
 
 }

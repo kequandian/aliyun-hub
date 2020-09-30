@@ -24,12 +24,20 @@ public class SmsConfiguration {
 
     @PostConstruct
     public void setSmsUtilProperties() {
+        log.info("start config sms properties ...");
         AliyunProperties.SmsProperties sms = aliyunProperties.getSms();
         if (sms == null) {
             log.warn("sms properties is empty!");
             return;
         }
-        SmsUtil.init(sms.getAccessKeyId(), sms.getAccessSecret(), sms.getSignName());
+        /* 是否全局禁止短信发送 */
+        Boolean enable = Optional.ofNullable(sms.getEnable()).orElse(true);
+        log.info("sms global enable : {}", enable);
+        if (!enable) {
+            log.warn("sms 短信设置为全局禁止！");
+        }
+        SmsUtil.init(sms.getAccessKeyId(), sms.getAccessSecret(), sms.getSignName(), enable);
 
+        log.info("config sms properties end");
     }
 }
