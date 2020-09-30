@@ -77,6 +77,48 @@ public class SmsUtil {
         }
     }
 
+    public void batchSendSms(List<String> phoneNumbers, String templateCode, List<String> templateParams) {
+        if (!smsEnable) {
+            return;
+        }
+        if (CollectionUtils.isEmpty(phoneNumbers)) {
+            log.error("phoneNumbers must not be empty");
+            return;
+        }
+        if (CollectionUtils.isEmpty(templateParams)) {
+            log.error("templateParams must not be empty");
+            return;
+        }
+        if (phoneNumbers.size() != templateParams.size()) {
+            log.error("phoneNumbers and templateParams must have same length");
+            return;
+        }
+
+        String phoneNumberJson = JSON.toJSONString(phoneNumbers);
+        String templateParamJson = JSON.toJSONString(templateParams);
+        List<String> signNames = Stream.generate(() -> signName)
+                .limit(phoneNumbers.size()).collect(Collectors.toList());
+        String signNameJson = JSON.toJSONString(signNames);
+
+
+        CommonRequest request = new CommonRequest();
+        request.setSysMethod(MethodType.POST);
+        request.setSysDomain(domain);
+        request.setSysVersion("2017-05-25");
+        request.setSysAction("SendBatchSms");
+        request.putQueryParameter("RegionId", "cn-hangzhou");
+        request.putQueryParameter("PhoneNumberJson", phoneNumberJson);
+        request.putQueryParameter("SignNameJson", signNameJson);
+        request.putQueryParameter("TemplateCode", templateCode);
+        request.putQueryParameter("TemplateParamJson", templateParamJson);
+        try {
+            CommonResponse response = client.getCommonResponse(request);
+            log.info(response.getData());
+        } catch (ClientException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @SneakyThrows
     public void main(String[] args) {
