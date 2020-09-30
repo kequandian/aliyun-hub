@@ -21,13 +21,13 @@ spring:
 #    initialize: false
 
 fs:
-  fileUploadPath: "attachments"
-  fileHost: "http://localhost:8080/"
+  fileUploadPath: "/attachments"
+  fileHost: "attachments"
 aliyun:
   sso:
     endpoint: "http://oss-cn-shenzhen.aliyuncs.com"
     accessKeyId: ""
-    accessKeySecret: ""
+    accessSecret: ""
     bucketName: ""
     username: ""
     thumbParam: "x-oss-process=image/resize,m_fill,h_750,w_750"

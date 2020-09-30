@@ -57,8 +57,11 @@ public class SmsUtil {
 
     public void sendSms(String phoneNumber, String templateCode, String templateParam) {
         if (!smsEnable) {
+            log.info(String.format("dev mode: sending message code [%s] to phone %s with parms: %s", 
+                                    templateCode, phoneNumber, templateParam));
             return;
         }
+
         CommonRequest request = new CommonRequest();
         request.setSysMethod(MethodType.POST);
         request.setSysDomain(domain);
@@ -79,6 +82,8 @@ public class SmsUtil {
 
     public void batchSendSms(List<String> phoneNumbers, String templateCode, List<String> templateParams) {
         if (!smsEnable) {
+            log.info(String.format("dev mode: sending message code [%s] to phone %s with parms: %s", 
+                                    templateCode, phoneNumber, templateParam));
             return;
         }
         if (CollectionUtils.isEmpty(phoneNumbers)) {
@@ -118,7 +123,6 @@ public class SmsUtil {
             e.printStackTrace();
         }
     }
-
 
     @SneakyThrows
     public void main(String[] args) {

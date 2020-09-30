@@ -11,3 +11,7 @@ build/
 logs/
 LOG**
 .DS_Store
+core/.classpath
+core/.factorypath
+core/.project
+core/.settings/

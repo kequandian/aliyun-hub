@@ -30,14 +30,15 @@ aliyun:
   sso:
     endpoint: "http://oss-cn-shenzhen.aliyuncs.com"
     accessKeyId: ""
-    accessKeySecret: ""
+    accessSecret: ""
     bucketName: ""
     username: ""
     thumbParam: "x-oss-process=image/resize,m_fill,h_750,w_750"
     accessUrl: "http://xxxxxx.oss-cn-shenzhen.aliyuncs.com/"
   sms:
+    signName: ""
     accessKeyId: ""
-    accessKeySecret: ""
+    accessSecret: ""
 ```
 
 
