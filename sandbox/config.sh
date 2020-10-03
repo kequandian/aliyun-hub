@@ -16,11 +16,12 @@ get_nginx_container() {
    docker network inspect $network  --format '{{range .Containers}}{{$name := .Name}}{{println $name}}{{end}}' | grep nginx
 }
 
+gateway_container=$(get_nginx_container)
+
 get_nginx_confd_path() {
-   docker inspect cinema-nginx --format '{{range .Mounts}}{{$path := .Source}}{{println $path}}{{end}}' | grep conf.d
+   docker inspect $gateway_container --format '{{range .Mounts}}{{$path := .Source}}{{println $path}}{{end}}' | grep conf.d
 }
 
-gateway_container=$(get_nginx_container)
 gateway_confd=$(get_nginx_confd_path)
 
 ## copy sandbox.d/*.conf to $gateway_confd/sandbox.d
