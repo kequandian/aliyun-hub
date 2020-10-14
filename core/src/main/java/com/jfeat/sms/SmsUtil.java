@@ -1,7 +1,6 @@
 package com.jfeat.sms;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.aliyuncs.CommonRequest;
 import com.aliyuncs.CommonResponse;
 import com.aliyuncs.DefaultAcsClient;
@@ -14,7 +13,6 @@ import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -82,8 +80,8 @@ public class SmsUtil {
 
     public void batchSendSms(List<String> phoneNumbers, String templateCode, List<String> templateParams) {
         if (!smsEnable) {
-            log.info(String.format("dev mode: sending message code [%s] to phone %s with parms: %s", 
-                                    templateCode, phoneNumber, templateParam));
+            log.info(String.format("dev mode: sending message code [%s] to phone %s with parms: %s",
+                    templateCode, phoneNumbers, templateParams));
             return;
         }
         if (CollectionUtils.isEmpty(phoneNumbers)) {
@@ -104,21 +102,22 @@ public class SmsUtil {
         List<String> signNames = Stream.generate(() -> signName)
                 .limit(phoneNumbers.size()).collect(Collectors.toList());
         String signNameJson = JSON.toJSONString(signNames);
+    }
 
-
+    public void querySendDetails(Long current, Long size, String phoneNumber, String date) {
         CommonRequest request = new CommonRequest();
         request.setSysMethod(MethodType.POST);
         request.setSysDomain(domain);
         request.setSysVersion("2017-05-25");
-        request.setSysAction("SendBatchSms");
+        request.setSysAction("QuerySendDetails");
         request.putQueryParameter("RegionId", "cn-hangzhou");
-        request.putQueryParameter("PhoneNumberJson", phoneNumberJson);
-        request.putQueryParameter("SignNameJson", signNameJson);
-        request.putQueryParameter("TemplateCode", templateCode);
-        request.putQueryParameter("TemplateParamJson", templateParamJson);
+        request.putQueryParameter("PhoneNumber", phoneNumber);
+        request.putQueryParameter("SendDate", date);
+        request.putQueryParameter("PageSize", String.valueOf(size));
+        request.putQueryParameter("CurrentPage", String.valueOf(current));
         try {
             CommonResponse response = client.getCommonResponse(request);
-            log.info(response.getData());
+            System.out.println(response.getData());
         } catch (ClientException e) {
             e.printStackTrace();
         }
