@@ -1,4 +1,4 @@
-## aliyun-hub-sandbox
+## aliyun-hub-deploy
 > aliyun-hub 文件上传模块自动部署
 
 #### 准备 API jar包 
@@ -23,9 +23,9 @@ $ mvn package
 > application.yml 示例
 ```yml
 ## 本地文件上传配置
-am:
+fs:
    fileUploadPath: /attachments
-   fileHost: http://aliyun-hub.sandbox.smallsaas.cn:8080/attachments   
+   fileHost: /attachments   
    
 ## aliyun服务配置
 aliyun:
@@ -36,50 +36,58 @@ aliyun:
     bucketName: ""
     username: ""
     thumbParam: "x-oss-process=image/resize,m_fill,h_750,w_750"
-    accessUrl: "http://muaskin.oss-cn-shenzhen.aliyuncs.com/"
+    accessUrl: "http://xxxxx.oss-cn-shenzhen.aliyuncs.com/"
   sms:
     accessKeyId: ""
     accessKeySecret: ""
 ```
 
-
-##### 在混合云 gateway 端增加以下配置并重新启动 
-> docker stop nginx-gateway && docker-compose restart nginx-gateway
-
-```
-    ## set route within hybrid nginx gateway
-    ## replace cloud route  http://aliyun-hub.sandbox.smallsaas.cn:8080
-
-    location /api/fs {
-        proxy_pass http://aliyun-hub.sandbox.smallsaas.cn:8080;
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto  $scheme;
-        proxy_buffering off;
-        proxy_max_temp_file_size 0;
-        proxy_connect_timeout 30;
-        proxy_cache_valid 200 302 10m;
-        proxy_cache_valid 301 1h;
-        proxy_cache_valid any 1m;
-    }
-    
-    location /api/cloud/aliyun {
-        proxy_pass http://aliyun-hub.sandbox.smallsaas.cn:8080;
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto  $scheme;
-        proxy_buffering off;
-        proxy_max_temp_file_size 0;
-        proxy_connect_timeout 30;
-        proxy_cache_valid 200 302 10m;
-        proxy_cache_valid 301 1h;
-        proxy_cache_valid any 1m;
-    }
-```
-
-#### 在云端启动aliyun-hub 服务docker容器
+#### 独立部署aliyun-hub服务
 ```
 $ docker-compose up -d
 ```
+
+
+#### 在混合云 gateway 端增加以下配置并重新启动 
+> docker stop nginx-gateway && docker-compose restart nginx-gateway
+
+```
+$ cat aliyun-hub-hybrid-gateway.conf
+location /images {
+        proxy_pass http://aliyun-hub-nginx:80;
+    }
+
+    location /attachments {
+        proxy_pass http://aliyun-hub-nginx:80;
+    }
+
+    ## set route within hybrid nginx gateway
+    location /api/fs {
+        proxy_pass http://aliyun-hub:8080;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto  $scheme;
+        proxy_buffering off;
+        proxy_max_temp_file_size 0;
+        proxy_connect_timeout 30;
+        proxy_cache_valid 200 302 10m;
+        proxy_cache_valid 301 1h;
+        proxy_cache_valid any 1m;
+    }
+
+    location /api/cloud/aliyun {
+        proxy_pass http://aliyun-hub:8080;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto  $scheme;
+        proxy_buffering off;
+        proxy_max_temp_file_size 0;
+        proxy_connect_timeout 30;
+        proxy_cache_valid 200 302 10m;
+        proxy_cache_valid 301 1h;
+        proxy_cache_valid any 1m;
+    }
+```
+
