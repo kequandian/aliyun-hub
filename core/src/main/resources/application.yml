@@ -37,3 +37,8 @@ aliyun:
     signName: ""
     accessKeyId: ""
     accessSecret: ""
+
+  orc:
+    AppKey: 203950845
+    AppSecret: kRWDBm3rH6FaNlP1x72d7kscVStA3pSD
+    AppCode: 400e0efd8c0b49b0b5a01daabcf86e9e
