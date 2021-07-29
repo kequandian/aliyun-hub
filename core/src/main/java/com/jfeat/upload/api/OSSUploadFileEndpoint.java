@@ -2,6 +2,7 @@ package com.jfeat.upload.api;
 
 import com.jfeat.crud.base.tips.SuccessTip;
 import com.jfeat.crud.base.tips.Tip;
+import com.jfeat.properties.AliyunProperties;
 import com.jfeat.upload.util.FileInfo;
 import com.jfeat.upload.util.OSSUtil;
 import io.swagger.annotations.Api;
@@ -10,6 +11,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -30,11 +32,12 @@ public class OSSUploadFileEndpoint {
      * http://muaskin-test.oss-cn-shenzhen.aliyuncs.com/10f2094d-534b-43c0-b843-b8a93a27b2a4/Pore.png
      **/
 
-    public static final String endpoint = "http://oss-cn-shenzhen.aliyuncs.com";
+/*    public static final String endpoint = "http://oss-cn-shenzhen.aliyuncs.com";
     public static final String accessKeyId = "";
     public static final String accessKeySecret = "";
-    public static final String bucketName = "";
-    public static String username = "";
+    public static final String bucketName = "";*/
+    @Resource
+    public   AliyunProperties aliyunProperties;
 
     /**
      * 图片压缩参数
@@ -57,9 +60,10 @@ public class OSSUploadFileEndpoint {
         String extensionName= FilenameUtils.getExtension(originalFileName);
         Long fileSize = file.getSize();
 
+        AliyunProperties.SSOProperties sso = aliyunProperties.getSso();
         String targetFileName = UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(file.getOriginalFilename());
-        OSSUtil util = OSSUtil.build(endpoint, accessKeyId, accessKeySecret);
-        util.upload(bucketName, targetFileName, file.getInputStream());
+        OSSUtil util = OSSUtil.build(sso.getEndpoint(), sso.getAccessKeyId(), sso.getAccessKeyId());
+        util.upload(sso.getBucketName(), targetFileName, file.getInputStream());
         return SuccessTip.create(FileInfo.create(accessUrl, targetFileName,extensionName,originalFileName,fileSize));
     }
 }
