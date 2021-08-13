@@ -1,7 +1,3 @@
-fs:
-  fileUploadPath: /attachments
-  fileHost: /attachments
-
 aliyun:
   sso:
     endpoint: "http://oss-cn-shenzhen.aliyuncs.com"
