@@ -1,3 +1,5 @@
+This repository has been deprecated which will be merge into zero-io 
+
 ## 专用于aliyun的服务对接
 
 #### application.yml 配置文件
