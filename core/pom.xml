@@ -2,29 +2,26 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <groupId>com.jfeat</groupId>
-        <artifactId>sb-parent</artifactId>
-        <version>1.0.0</version>
-        <relativePath/>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.jfeat</groupId>
     <artifactId>aliyun-hub</artifactId>
     <version>1.1.0</version>
     <packaging>jar</packaging>
 
+    <parent>
+        <groupId>com.jfeat</groupId>
+        <artifactId>pom-parent</artifactId>
+        <version>1.0.0</version>
+        <relativePath/>
+    </parent>
+
     <properties>
         <skipStandalone>true</skipStandalone>
-        <crud-dev.version>0.0.2</crud-dev.version>
-        <crud-base.version>0.0.2</crud-base.version>
         <aliyun-sdk-oss.version>3.4.0</aliyun-sdk-oss.version>
         <aliyun-java-sdk-core.version>4.5.3</aliyun-java-sdk-core.version>
     </properties>
 
     <dependencies>
-
-
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -40,20 +37,19 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.5</version>
+            <version>${commons-io.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.52</version>
+            <version>${fastjson.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
 
         <dependency>
             <groupId>com.jfeat</groupId>
